@@ -1,25 +1,18 @@
 {
   "Phone Book": [
     {
-      "Phone number": 1,
-      "First name": "s",
-      "Last name": "s",
-      "Full name": "s s",
-      "Region": "s"
+      "Phone number": 380972454192,
+      "First name": "Vika",
+      "Last name": "Gal",
+      "Full name": "Vika Gal",
+      "Region": "Odesa"
     },
     {
-      "Phone number": 2,
-      "First name": "c",
-      "Last name": "c",
-      "Full name": "c c",
-      "Region": "c"
-    },
-    {
-      "Phone number": 4,
-      "First name": "d",
-      "Last name": "s",
-      "Full name": "d s",
-      "Region": "a"
+      "Phone number": 380975566328,
+      "First name": "Artur",
+      "Last name": "Bober",
+      "Full name": "Artur Bober",
+      "Region": "Lviv"
     }
   ]
 }
