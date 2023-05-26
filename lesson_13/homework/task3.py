@@ -1,25 +1,70 @@
-def arg_rules(type_: type, max_length: int, contains: list):
-    def decorator(func):
-        def wrapper(*args):
-            for arg in args:
-                if not isinstance(arg, type_):
-                    print(f"Invalid argument type: {arg} is not of type {type_}.")
-                    return False
-                if len(arg) > max_length:
-                    print(f"Length is bigger, that {max_length}. Result - False.")
-                    return False
+CHANNELS = ["BBC", "Discovery", "TV1000"]
 
-                for symbol in contains:
-                    if symbol not in arg:
-                        print(f"Dont have a required symbol: {symbol}.")
-                        return False
-            return func(*args)
-        return wrapper
-    return decorator
 
-@arg_rules(type_=str, max_length=15, contains=['05', '@'])
-def create_slogan(name: str) -> str:
-    return f"{name} drinks pepsi in his brand new BMW!"
+class TVController():
+    def __init__(self, channels):
+        self.channels = channels
+        self.current_channel_index = 0
 
-assert create_slogan('johndoe05@gmail.com') is False
-assert create_slogan('S@SH05') == 'S@SH05 drinks pepsi in his brand new BMW!'
+    def first_channel(self):
+        self.current_channel_index = 0
+        return self.current_channel()
+
+    def last_channel(self):
+        self.current_channel_index = len(self.channels) - 1
+        return self.channels[self.current_channel_index]
+
+
+
+    def turn_channel(self, N):
+        if 1 <= N <= (len(self.channels) - 1):
+            self.current_channel_index = N - 1
+            return self.channels[self.current_channel_index]
+        else:
+            print(f'Channel {N} not works')
+
+    def next_channel(self):
+        self.current_channel_index = (self.current_channel_index + 1) % len(self.channels)
+        return self.current_channel()
+
+    def previous_channel(self):
+        self.current_channel_index = (self.current_channel_index - 1) % len(self.channels)
+        return self.current_channel()
+
+    def current_channel(self):
+        return self.channels[self.current_channel_index]
+
+    def is_exist(self, channel):
+        if isinstance(channel, int):
+            return "Yes" if 1 <= channel <= len(self.channels) else "No"
+        elif isinstance(channel, str):
+            return "Yes" if channel in self.channels else "No"
+        else:
+            return "Invalid argument"
+
+
+controller = TVController(CHANNELS)
+
+print(controller.first_channel())
+print(controller.last_channel())
+print(controller.turn_channel(1))
+print(controller.next_channel())
+print(controller.previous_channel())
+print(controller.current_channel())
+print(controller.is_exist(4))
+print(controller.is_exist("BBC"))
+
+# Можно убрать коммент, чтобы сделать проверку на правильность - True/False
+# print(controller.first_channel() == "BBC")
+# print(controller.last_channel() == "TV1000")
+# print(controller.turn_channel(1) == "BBC")
+# print(controller.next_channel() == "Discovery")
+# print(controller.previous_channel() == "BBC")
+# print(controller.current_channel() == "BBC")
+# print(controller.is_exist(4) == "No")
+# print(controller.is_exist("BBC") == "Yes")
+
+
+
+
+
