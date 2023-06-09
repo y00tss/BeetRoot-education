@@ -7,10 +7,7 @@ class TypeDecorators:
         @wraps(func)
         def wrapper(*args, **kwargs):
             result = func(*args, **kwargs)
-            try:
-                return int(result)
-            except ValueError:
-                return result
+            return int(result)
 
         return wrapper
 
@@ -42,10 +39,7 @@ class TypeDecorators:
         @wraps(func)
         def wrapper(*args, **kwargs):
             result = func(*args, **kwargs)
-            try:
-                return float(result)
-            except ValueError:
-                return result
+            return float(result)
 
         return wrapper
 
@@ -59,9 +53,11 @@ def do_int(string: str):
 def do_bool(string: str):
     return string
 
+
 @TypeDecorators.to_str
 def do_str(string: str):
     return string
+
 
 @TypeDecorators.to_float
 def do_float(string: str):
@@ -72,4 +68,3 @@ assert do_int('25') == 25
 assert do_bool('True') is True
 assert do_str(25) == '25'
 assert do_float('25.5') == 25.5
-
